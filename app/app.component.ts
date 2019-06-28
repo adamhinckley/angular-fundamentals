@@ -5,9 +5,10 @@ import { Component } from "@angular/core";
   styleUrls: ["app.component.scss"],
   template: `
     <div>
-      <button (click)="handleClick()">Change Name</button>
-      <input type="text" [ngModel]="name" (ngModelChange)="handleChange($event)" />
-      <input type="text" [(ngModel)]="name" />
+      <button (click)="handleClick(username.value)">Get Value</button>
+      // ref with a hashtag on line 10 is used on line 8. Template ref gives access to the
+      //DOM element
+      <input type="text" #username />
       <div>{{ name }}</div>
     </div>
   `
@@ -18,7 +19,7 @@ export class AppComponent {
   handleChange(value: string) {
     this.name = value;
   }
-  handleClick() {
-    this.name === "Bob" ? (this.name = "Adam") : (this.name = "Bob");
+  handleClick(value: string) {
+    console.log(value);
   }
 }
