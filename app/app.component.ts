@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  styleUrls: ['app.component.scss'],
+  selector: "app-root",
+  styleUrls: ["app.component.scss"],
   template: `
-    <div class="app">
-      Hello!
+    <div>
+      {{ title }}
+      <img [src]="logo" />
     </div>
   `
 })
 export class AppComponent {
+  title: string;
+  isHappy: boolean = true;
+  numberOne: number = 1;
+  numberTwo: number = 2;
 
+  constructor() {
+    this.title = "Ultimate Angular";
+  }
 }
