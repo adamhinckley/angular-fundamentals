@@ -5,18 +5,20 @@ import { Component } from "@angular/core";
   styleUrls: ["app.component.scss"],
   template: `
     <div>
-      {{ title }}
-      <img [src]="logo" />
+      <button (click)="handleClick()">Change Name</button>
+      <input type="text" [ngModel]="name" (ngModelChange)="handleChange($event)" />
+      <input type="text" [(ngModel)]="name" />
+      <div>{{ name }}</div>
     </div>
   `
 })
 export class AppComponent {
-  title: string;
-  isHappy: boolean = true;
-  numberOne: number = 1;
-  numberTwo: number = 2;
+  name: string = "Adam";
 
-  constructor() {
-    this.title = "Ultimate Angular";
+  handleChange(value: string) {
+    this.name = value;
+  }
+  handleClick() {
+    this.name === "Bob" ? (this.name = "Adam") : (this.name = "Bob");
   }
 }
