@@ -9,19 +9,26 @@ interface Passenger {
 @Component({
   selector: "app-root",
   styleUrls: ["app.component.scss"],
-  // *ngFor is like a for loop in vanilla JS on line 23
-  // everything in the template tag is what's going on under the hood in *ngFor
+  // First one lets you change a single class, second one lets you change as many classes as you need.
   template: `
     <div class="app">
       <h3>Airline Passengers</h3>
       <ul>
-        <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
-          <li>{{ i }}: {{ passenger.fullname }}</li>
-        </template>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
+          {{ i }}: {{ passenger.fullname }}
+        </li>
       </ul>
       <h3>Airline Passengers</h3>
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngClass]="{
+              'checked-in': passenger.checkedIn,
+              'checked-out': !passenger.checkedIn
+            }"
+          ></span>
           {{ i }}: {{ passenger.fullname }}
         </li>
       </ul>
