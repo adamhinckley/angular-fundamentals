@@ -9,7 +9,10 @@ interface Passenger {
 @Component({
   selector: "app-root",
   styleUrls: ["app.component.scss"],
-  // First one lets you change a single class, second one lets you change as many classes as you need.
+  //first one is [class]
+  //second one is [style]
+  //third one is [ngStyle]
+  // they all paint the DOM in in similar but different ways
   template: `
     <div class="app">
       <h3>Airline Passengers</h3>
@@ -24,10 +27,17 @@ interface Passenger {
         <li *ngFor="let passenger of passengers; let i = index">
           <span
             class="status"
-            [ngClass]="{
-              'checked-in': passenger.checkedIn,
-              'checked-out': !passenger.checkedIn
-            }"
+            [style.backgroundColor]="passenger.checkedIn ? '#2ecc71' : '#c0392b'"
+          ></span>
+          {{ i }}: {{ passenger.fullname }}
+        </li>
+      </ul>
+      <h3>Airline Passengers</h3>
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngStyle]="{ backgroundColor: passenger.checkedIn ? '#2ecc71' : '#c0392b' }"
           ></span>
           {{ i }}: {{ passenger.fullname }}
         </li>
