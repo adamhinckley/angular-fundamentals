@@ -9,11 +9,21 @@ import "rxjs/add/operator/map";
 const PASSENGER_API: string = "/api/passengers";
 @Injectable()
 export class PassengerDashboardService {
-  constructor(private http: Http) {
-    console.log(this.http);
-  }
+  constructor(private http: Http) {}
 
   getPassengers(): Observable<Passenger[]> {
     return this.http.get(PASSENGER_API).map((response: Response) => response.json());
+  }
+
+  updatePassenger(passenger: Passenger): Observable<Passenger> {
+    return this.http
+      .put(`${PASSENGER_API}/${passenger.id}`, passenger)
+      .map((response: Response) => response.json());
+  }
+
+  deletePassenger(passenger: Passenger): Observable<Passenger> {
+    return this.http
+      .delete(`${PASSENGER_API}/${passenger.id}`)
+      .map((response: Response) => response.json());
   }
 }
