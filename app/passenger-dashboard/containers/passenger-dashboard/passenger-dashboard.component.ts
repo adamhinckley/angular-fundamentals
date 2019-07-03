@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../../models/passenger.interface";
-//
+// edit and remove on lines 15 and 16 are sent to the child component
+// and event emitters fire on the child component.
 @Component({
   selector: "passenger-dashboard",
   styleUrls: ["passenger-dashboard.component.scss"],
@@ -11,6 +12,8 @@ import { Passenger } from "../../models/passenger.interface";
       <passenger-detail
         *ngFor="let passenger of passengers"
         [detail]="passenger"
+        (edit)="handleEdit($event)"
+        (remove)="handleRemove($event)"
       ></passenger-detail>
     </div>
   `
@@ -57,5 +60,11 @@ export class PassengerDashboardComponent implements OnInit {
         children: null
       }
     ];
+  }
+  handleRemove(event) {
+    console.log(event);
+  }
+  handleEdit(event) {
+    console.log(event);
   }
 }
