@@ -7,7 +7,8 @@ import { Passenger } from "../../models/passenger.interface";
   template: `
     <div>
       <h3>Airline Passengers</h3>
-      <div>Total checked in: {{ checkedInCount() }}/{{ items.length }}</div>
+      //added the safe navigation question mark to get rid of the error in the console
+      <div>Total checked in: {{ checkedInCount() }}/{{ items?.length }}</div>
     </div>
   `
 })
