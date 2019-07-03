@@ -5,6 +5,8 @@ import { Passenger } from "./models/passenger.interface";
 import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/operator/toPromise";
+import "rxjs/add/operator/catch";
+import "rxjs/add/observable/throw";
 
 const PASSENGER_API: string = "/api/passengers";
 @Injectable()
@@ -14,7 +16,8 @@ export class PassengerDashboardService {
     return this.http
       .get(PASSENGER_API)
       .toPromise()
-      .then((response: Response) => response.json());
+      .then((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json));
   }
 
   updatePassenger(passenger: Passenger): Promise<Passenger> {
@@ -27,13 +30,15 @@ export class PassengerDashboardService {
     return this.http
       .put(`${PASSENGER_API}/${passenger.id}`, passenger, options)
       .toPromise()
-      .then((response: Response) => response.json());
+      .then((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json));
   }
 
   deletePassenger(passenger: Passenger): Promise<Passenger> {
     return this.http
       .delete(`${PASSENGER_API}/${passenger.id}`)
       .toPromise()
-      .then((response: Response) => response.json());
+      .then((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json));
   }
 }
