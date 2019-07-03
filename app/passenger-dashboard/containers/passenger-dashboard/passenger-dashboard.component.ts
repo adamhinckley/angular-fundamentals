@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../../models/passenger.interface";
-// edit and remove on lines 15 and 16 are sent to the child component
-// and event emitters fire on the child component.
 @Component({
   selector: "passenger-dashboard",
   styleUrls: ["passenger-dashboard.component.scss"],
@@ -61,10 +59,18 @@ export class PassengerDashboardComponent implements OnInit {
       }
     ];
   }
-  handleRemove(event) {
-    console.log(event);
+  handleRemove(event: Passenger) {
+    this.passengers = this.passengers.filter((passenger: Passenger) => {
+      return passenger.id !== event.id;
+    });
   }
   handleEdit(event) {
-    console.log(event);
+    this.passengers = this.passengers.map((passenger: Passenger) => {
+      if (passenger.id === event.id) {
+        passenger = Object.assign({}, passenger, event);
+      }
+      return passenger;
+    });
+    console.log(this.passengers);
   }
 }
