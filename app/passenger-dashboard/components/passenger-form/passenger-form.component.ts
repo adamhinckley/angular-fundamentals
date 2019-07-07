@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+
 import { Passenger } from "../../models/passenger.interface";
 import { Baggage } from "../../models/baggage.interface";
 
@@ -9,7 +10,7 @@ import { Baggage } from "../../models/baggage.interface";
     <form #form="ngForm" novalidate>
       {{ detail | json }}
       <div>
-        Passenger Name:
+        Passenger name:
         <input
           type="text"
           name="fullname"
@@ -17,16 +18,17 @@ import { Baggage } from "../../models/baggage.interface";
           #fullname="ngModel"
           [ngModel]="detail?.fullname"
         />
-        <div *ngIf="fullname.errors?.required && fullname.touched" class="error">
-            Passenger name is required
+        <div *ngIf="fullname.errors?.required && fullname.dirty" class="error">
+          Passenger name is required
         </div>
       </div>
       <div>
-        Passenger id:
+        Passenger ID:
         <input type="number" name="id" required #id="ngModel" [ngModel]="detail?.id" />
-        <div *ngIf="id.errors?.required && id.touched" class="error">
-            Passenger name is required
+        <div *ngIf="id.errors?.required && id.dirty" class="error">
+          Passenger ID is required
         </div>
+      </div>
       <div>
         <label>
           <input
@@ -53,9 +55,7 @@ import { Baggage } from "../../models/baggage.interface";
           </option>
         </select>
       </div>
-      <div>
-        {{ form.value | json }}
-      </div>
+      <div>{{ form.value | json }}</div>
       <div>Valid: {{ form.valid | json }}</div>
       <div>Invalid: {{ form.invalid | json }}</div>
     </form>
@@ -68,19 +68,19 @@ export class PassengerFormComponent {
   baggage: Baggage[] = [
     {
       key: "none",
-      value: "no baggage"
+      value: "No baggage"
     },
     {
-      key: "carry",
-      value: "carry on baggage"
+      key: "hand-only",
+      value: "Hand baggage"
     },
     {
-      key: "checked-baggage",
-      value: "checked baggage"
+      key: "hold-only",
+      value: "Hold baggage"
     },
     {
-      key: "check-carry",
-      value: "carry on and checked baggage"
+      key: "hand-hold",
+      value: "Hand and hold baggage"
     }
   ];
 
