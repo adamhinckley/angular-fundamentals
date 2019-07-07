@@ -5,20 +5,28 @@ import { Baggage } from "../../models/baggage.interface";
 @Component({
   selector: "passenger-form",
   styleUrls: ["passenger-form.component.scss"],
-  // Both of the select tags do the same thing
-  //The first one is easier to read
-  //The second one is shorter and a nice use of the API
   template: `
     <form #form="ngForm" novalidate>
       {{ detail | json }}
       <div>
         Passenger Name:
-        <input type="text" name="fullname" [ngModel]="detail?.fullname" />
+        <input
+          type="text"
+          name="fullname"
+          required
+          #fullname="ngModel"
+          [ngModel]="detail?.fullname"
+        />
+        <div *ngIf="fullname.errors?.required && fullname.touched" class="error">
+            Passenger name is required
+        </div>
       </div>
       <div>
         Passenger id:
-        <input type="number" name="id" [ngModel]="detail?.id" />
-      </div>
+        <input type="number" name="id" required #id="ngModel" [ngModel]="detail?.id" />
+        <div *ngIf="id.errors?.required && id.touched" class="error">
+            Passenger name is required
+        </div>
       <div>
         <label>
           <input
@@ -44,13 +52,12 @@ import { Baggage } from "../../models/baggage.interface";
             {{ item.value }}
           </option>
         </select>
-        <select name="baggage" [ngModel]="detail?.baggage">
-          <option *ngFor="let item of baggage" [ngValue]="item.key">
-            {{ item.value }}
-          </option>
-        </select>
       </div>
-      {{ form.value | json }}
+      <div>
+        {{ form.value | json }}
+      </div>
+      <div>Valid: {{ form.valid | json }}</div>
+      <div>Invalid: {{ form.invalid | json }}</div>
     </form>
   `
 })
