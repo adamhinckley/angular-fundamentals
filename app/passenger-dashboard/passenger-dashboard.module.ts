@@ -18,7 +18,10 @@ import { PassengerDashboardService } from "./passenger-dashboard.service";
 const routes: Routes = [
   {
     path: "passengers",
-    component: PassengerDashboardComponent
+    children: [
+      { path: "", component: PassengerDashboardComponent },
+      { path: ":id", component: PassengerViewerComponent }
+    ]
   }
 ];
 
@@ -30,7 +33,6 @@ const routes: Routes = [
     PassengerDetailComponent,
     PassengerFormComponent
   ],
-  //forChild is used because this is a child component
   imports: [CommonModule, HttpModule, FormsModule, RouterModule.forChild(routes)],
 
   exports: [PassengerViewerComponent],
