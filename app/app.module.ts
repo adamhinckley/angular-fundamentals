@@ -8,7 +8,7 @@ import { HomeComponent } from "./home.component";
 import { NotFoundComponent } from "./not-found.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent, pathMatch: "full" },
+  { path: "", redirectTo: "passengers", pathMatch: "full" },
   // ** is a wildcard route that loads a 404 component for routes that are not in the app.
   { path: "**", component: NotFoundComponent }
 ];
