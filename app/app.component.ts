@@ -33,6 +33,11 @@ export class AppComponent {
       exact: true
     },
     {
+      link: "/passengers",
+      name: "passengers",
+      exact: false
+    },
+    {
       link: "/oops",
       name: "404",
       exact: false
