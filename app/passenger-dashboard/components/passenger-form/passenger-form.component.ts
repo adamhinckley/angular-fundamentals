@@ -1,5 +1,4 @@
 import { Component, Input, Output } from "@angular/core";
-
 import { Passenger } from "../../models/passenger.interface";
 import { Baggage } from "../../models/baggage.interface";
 import { EventEmitter } from "@angular/forms/src/facade/async";
