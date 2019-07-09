@@ -28,6 +28,7 @@ import { Passenger } from "../../models/passenger.interface";
       </div>
       <button (click)="toggleEdit()">{{ editing ? "Done" : "Edit" }}</button>
       <button (click)="onRemove()">Delete</button>
+      <button (click)="goToPassenger()">View</button>
     </div>
   `
 })
@@ -37,11 +38,14 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
   //fires event to parent component passenger-dashboard.component.ts
   @Output()
-  edit: EventEmitter<any> = new EventEmitter();
+  edit: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
   //fires event to parent component passenger-dashboard.component.ts
   @Output()
-  remove: EventEmitter<any> = new EventEmitter();
+  remove: EventEmitter<Passenger> = new EventEmitter<Passenger>();
+
+  @Output()
+  view: EventEmitter<Passenger> = new EventEmitter<Passenger>();
 
   editing: boolean = false;
 
@@ -57,6 +61,10 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
   onNameChange(name: string) {
     this.detail.fullname = name;
+  }
+
+  goToPassenger() {
+    this.view.emit(this.detail);
   }
   toggleEdit() {
     if (this.editing) {
